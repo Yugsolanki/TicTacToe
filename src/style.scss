@@ -1,0 +1,202 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 10px;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+}
+
+main, section {
+    width: 100%;
+    height: 100vh;
+    display: grid;
+    position: relative;
+    z-index: 1;
+}
+
+main {
+    background-color: #FFDCAB;
+}
+
+.button {
+    position: relative;
+    width: 13rem;
+    height: 6rem;
+    margin: auto;
+    font-size: 4rem;
+    font-family: 'Bebas Neue', cursive;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    letter-spacing: 0.1rem;
+    color: white;
+    background: #D90FAF;
+    border: 2px solid #000000;
+    transition: all 800ms ease-in-out;
+
+    a {
+        color: white;
+        text-decoration: none;
+    }
+}
+
+/*
+.button::before {
+    content: "";
+    position: absolute;
+    top: .4rem;
+    left: .4rem;
+    width: 13rem;
+    height: 6rem;
+    background-color: black;
+    z-index: -1;
+    transition: all 500ms ease-in-out;
+}
+*/
+
+.button:hover {
+    top: .2rem;
+    left: .2rem;
+}
+
+.shadow {
+    position: absolute;
+    left: 1.3rem;
+    right: 0;
+    top: 1.3rem;
+    bottom: 0;
+    margin: auto;
+    width: 13rem;
+    height: 6rem;
+    background-color: black;
+    z-index: -1;
+    transition: all 500ms ease-in-out;
+}
+
+
+
+
+/*
+-------------------------------------------
+---------------------------------------------
+*/
+
+.player-main {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    position: relative;
+    z-index: 1;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #FFDCAB;
+}
+
+.player-section {
+    margin: auto;
+    height: 75%;
+    display: grid;
+    position: relative;
+    z-index: 1;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+
+    .player-name {
+        position: relative;
+    
+        h1 {
+            font-size: 4rem;
+            font-family: 'Bebas Neue', cursive;
+            font-weight: 400;
+            text-align: center;
+            letter-spacing: 0.1rem;
+            color: #000000;
+        }
+    
+        input {
+            position: relative;
+            bottom: 0;
+            width: 35rem;
+            height: 4rem;
+            padding: 0 0 0 .5rem;
+            outline: none;
+            border: 2px solid black;
+            font-size: 2rem;
+            font-family: 'Bebas Neue', cursive;
+            font-weight: 400;
+            letter-spacing: 0.1rem;
+        }
+        
+        .shadow-input {
+            position: absolute;
+            width: 35rem;
+            height: 4rem;
+            bottom: -.4rem;
+            left: .4rem;
+            background-color: #000000;
+            z-index: -1;
+        }
+    
+    }
+    
+    .button-div {
+        position: relative;
+        margin: -6rem 0 0 0;
+    
+        .button {
+            position: relative;
+            width: 13rem;
+            height: 6rem;
+            margin: auto;
+            font-size: 4rem;
+            font-family: 'Bebas Neue', cursive;
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            letter-spacing: 0.1rem;
+            color: white;
+            background: #D90FAF;
+            border: 2px solid #000000;
+            a {
+                color: white;
+                text-decoration: none;
+            }
+        }
+    
+        .button:hover {
+            top: .2rem;
+            left: .2rem;
+        }
+        
+        .shadow {
+            position: absolute;
+            left: 1.3rem;
+            right: 0;
+            top: 1.3rem;
+            bottom: 0;
+            margin: auto;
+            width: 13rem;
+            height: 6rem;
+            background-color: black;
+            z-index: -1;
+            transition: all 500ms ease-in-out;
+        }
+    }
+}
+
