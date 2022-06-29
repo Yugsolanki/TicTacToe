@@ -7,23 +7,28 @@
 
 html {
   font-size: 10px;
+  background-color: #FFDCAB;
 }
 
-body {
+html, body {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+}
+
+main, section {
   width: 100vw;
   height: 100vh;
 }
 
-main, section {
-  width: 100%;
-  height: 100vh;
+.main-home, .section-home {
   display: grid;
   position: relative;
   z-index: 1;
-}
-
-main {
-  background-color: #FFDCAB;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 .button {
@@ -76,7 +81,7 @@ main {
   margin: auto;
   width: 13rem;
   height: 6rem;
-  background-color: black;
+  background-color: #000000;
   z-index: -1;
   transition: all 500ms ease-in-out;
 }
@@ -85,32 +90,22 @@ main {
 -------------------------------------------
 ---------------------------------------------
 */
-.player-main {
-  width: 100%;
-  height: 100%;
+.main-player, .section-player {
+  margin: auto;
   display: grid;
   position: relative;
   z-index: 1;
   justify-content: center;
-  align-items: center;
-  text-align: center;
-  background-color: #FFDCAB;
+  align-content: center;
 }
 
-.player-section {
-  margin: auto;
-  height: 75%;
-  display: grid;
-  position: relative;
-  z-index: 1;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+.section-player {
+  grid-gap: 5rem;
 }
-.player-section .player-name {
+.section-player .player-name {
   position: relative;
 }
-.player-section .player-name h1 {
+.section-player .player-name h1 {
   font-size: 4rem;
   font-family: "Bebas Neue", cursive;
   font-weight: 400;
@@ -118,20 +113,22 @@ main {
   letter-spacing: 0.1rem;
   color: #000000;
 }
-.player-section .player-name input {
+.section-player .player-name input {
   position: relative;
+  display: grid;
+  align-items: center;
   bottom: 0;
   width: 35rem;
   height: 4rem;
   padding: 0 0 0 0.5rem;
   outline: none;
-  border: 2px solid black;
+  border: 2px solid #000000;
   font-size: 2rem;
   font-family: "Bebas Neue", cursive;
   font-weight: 400;
   letter-spacing: 0.1rem;
 }
-.player-section .player-name .shadow-input {
+.section-player .player-name .shadow-input {
   position: absolute;
   width: 35rem;
   height: 4rem;
@@ -140,11 +137,198 @@ main {
   background-color: #000000;
   z-index: -1;
 }
-.player-section .button-div {
+.section-player .button-div {
   position: relative;
-  margin: -6rem 0 0 0;
+  margin: 0rem 0 0 0;
 }
-.player-section .button-div .button {
+.section-player .button-div .button {
+  position: relative;
+  width: 13rem;
+  height: 6rem;
+  margin: auto;
+  font-size: 4rem;
+  font-family: "Bebas Neue", cursive;
+  font-weight: 400;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  letter-spacing: 0.1rem;
+  color: white;
+  background: #9111D7;
+  border: 2px solid #000000;
+}
+.section-player .button-div .button a {
+  color: white;
+  text-decoration: none;
+}
+.section-player .button-div .button:hover {
+  top: 0.2rem;
+  left: 0.2rem;
+}
+.section-player .button-div .shadow {
+  position: absolute;
+  left: 1.3rem;
+  right: 0;
+  top: 1.3rem;
+  bottom: 0;
+  margin: auto;
+  width: 13rem;
+  height: 6rem;
+  background-color: black;
+  z-index: -1;
+  transition: all 500ms ease-in-out;
+}
+.section-player .rounds {
+  position: relative;
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 5rem;
+}
+.section-player .rounds .rounds_box {
+  position: relative;
+  width: 7rem;
+  height: 4rem;
+  background-color: white;
+  color: #000000;
+  font-size: 3rem;
+  font-family: "Bebas Neue", cursive;
+  font-weight: 400;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  letter-spacing: 0.1rem;
+  border: 2px solid #000000;
+}
+.section-player .rounds .rounds_box::before {
+  content: "";
+  position: absolute;
+  top: 0.2rem;
+  left: 0.1rem;
+  width: 7rem;
+  height: 4rem;
+  background-color: #000000;
+  z-index: -1;
+}
+.section-player .rounds .rounds_button {
+  width: 3rem;
+  height: 3rem;
+  background-color: white;
+  border-radius: 50%;
+  outline: none;
+  border: 2px solid #000000;
+}
+
+/*
+----------------------------------------------------------------
+----------------------------------------------------------------
+*/
+.section-game {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /*-----GAME BOARD----*/
+}
+.section-game .score-container {
+  position: relative;
+  width: 100%;
+  height: 8rem;
+  display: grid;
+  grid-auto-flow: row;
+  grid-template-columns: 1fr 1fr;
+}
+.section-game .score-container .player-score-box {
+  position: relative;
+  width: 100%;
+  height: 10rem;
+  border-width: 2px 0 2px 2px;
+  border-style: solid;
+  border-color: #000000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  gap: 0rem;
+  text-align: center;
+}
+.section-game .score-container h1 {
+  font-size: 3rem;
+  font-family: "Bebas Neue", cursive;
+  font-weight: 400;
+}
+.section-game #number-rounds {
+  font-size: 3rem;
+  font-family: "Bebas Neue", cursive;
+  font-weight: 400;
+  text-align: center;
+  display: block;
+  margin: 4rem;
+}
+.section-game .game-box {
+  position: relative;
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 2rem;
+}
+.section-game .game-box #curtain {
+  position: absolute;
+  width: 30rem;
+  height: 30rem;
+  background-color: rgba(221, 125, 255, 0.8);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  justify-content: center;
+  align-content: center;
+}
+.section-game .game-box #curtain h1 {
+  font-size: 12rem;
+  color: white;
+  font-family: "Bebas Neue", cursive;
+  font-weight: 400;
+}
+.section-game .game-box .box-container {
+  position: relative;
+  width: 8rem;
+  height: 8rem;
+  z-index: 2;
+}
+.section-game .game-box .box-container .box {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border: 2px solid #000000;
+  background-color: #218B82;
+  display: grid;
+  align-items: center;
+  text-align: center;
+  font-size: 6rem;
+  font-family: "Bebas Neue", cursive;
+  font-weight: 400;
+  color: white;
+}
+.section-game .game-box .box-container .box-shadow {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+  z-index: -1;
+}
+.section-game .button-container {
+  margin-top: 6rem;
+  position: relative;
+}
+.section-game .button-container .quit {
   position: relative;
   width: 13rem;
   height: 6rem;
@@ -158,27 +342,22 @@ main {
   text-align: center;
   letter-spacing: 0.1rem;
   color: white;
-  background: #D90FAF;
+  background: #1111DA;
   border: 2px solid #000000;
+  transition: all 800ms ease-in-out;
 }
-.player-section .button-div .button a {
+.section-game .button-container .quit a {
   color: white;
   text-decoration: none;
 }
-.player-section .button-div .button:hover {
-  top: 0.2rem;
-  left: 0.2rem;
-}
-.player-section .button-div .shadow {
+.section-game .button-container .quit-shadow {
   position: absolute;
-  left: 1.3rem;
-  right: 0;
-  top: 1.3rem;
-  bottom: 0;
+  left: 0.7rem;
+  top: 0.7rem;
   margin: auto;
   width: 13rem;
   height: 6rem;
-  background-color: black;
+  background-color: #000000;
   z-index: -1;
   transition: all 500ms ease-in-out;
 }

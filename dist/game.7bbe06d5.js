@@ -117,79 +117,113 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
-var bundleURL = null;
+})({"game.js":[function(require,module,exports) {
+var player1Name = document.getElementById("player1-name");
+var player2Name = document.getElementById("player2-name");
+var player1Score = document.getElementById("player1-score");
+var player1Score = document.getElementById("player1-score");
+var curtain = document.getElementById('curtain');
+curtain.style.display = 'grid';
+var count = 3;
 
-function getBundleURLCached() {
-  if (!bundleURL) {
-    bundleURL = getBundleURL();
+function anim() {
+  if (count >= 0) {
+    var timer = document.getElementById('timer');
+
+    if (count === 0) {
+      timer.innerHTML = 'START!';
+    } else {
+      timer.innerHTML = count;
+    }
+
+    count--;
+    setTimeout(anim, 1000);
+  } else {
+    curtain.style.display = 'none';
   }
-
-  return bundleURL;
 }
 
-function getBundleURL() {
-  // Attempt to find the URL of the current script and use that as the base URL
-  try {
-    throw new Error();
-  } catch (err) {
-    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
+anim();
+var box = document.querySelectorAll(".box");
+var round = 1;
+var xScore = 0;
+var yScore = 0;
+var player = 'X';
+var gameOn = true;
+var roundWon = false;
+var board = ['', '', '', '', '', '', '', '', ''];
+var winningCombination = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
+box.forEach(function (tile, index) {
+  tile.addEventListener('click', function () {
+    return userAction(tile, index);
+  });
+});
 
-    if (matches) {
-      return getBaseURL(matches[0]);
+function userAction(tile, index) {
+  if (gameOn) {
+    if (tile.innerHTML != 'X' && tile.innerHTML != 'O') {
+      tile.innerHTML = player;
+      board[index] = player;
     }
   }
 
-  return '/';
+  checkWinner();
+  swapPlayer();
 }
 
-function getBaseURL(url) {
-  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)?\/[^/]+(?:\?.*)?$/, '$1') + '/';
+function swapPlayer() {
+  player = player == 'X' ? 'O' : 'X';
 }
 
-exports.getBundleURL = getBundleURLCached;
-exports.getBaseURL = getBaseURL;
-},{}],"../node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
-var bundle = require('./bundle-url');
+function checkWinner() {
+  for (var i = 0; i <= 7; i++) {
+    var winCondition = winningCombination[i];
+    var a = board[winCondition[0]];
+    var b = board[winCondition[1]];
+    var c = board[winCondition[2]];
 
-function updateLink(link) {
-  var newLink = link.cloneNode();
-
-  newLink.onload = function () {
-    link.remove();
-  };
-
-  newLink.href = link.href.split('?')[0] + '?' + Date.now();
-  link.parentNode.insertBefore(newLink, link.nextSibling);
-}
-
-var cssTimeout = null;
-
-function reloadCSS() {
-  if (cssTimeout) {
-    return;
-  }
-
-  cssTimeout = setTimeout(function () {
-    var links = document.querySelectorAll('link[rel="stylesheet"]');
-
-    for (var i = 0; i < links.length; i++) {
-      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
-        updateLink(links[i]);
-      }
+    if (a === '' || b === '' || c === '') {
+      continue;
     }
 
-    cssTimeout = null;
-  }, 50);
+    if (a === b && b === c) {
+      roundWon = true;
+      gameOn = false;
+      break;
+    }
+  }
+
+  if (roundWon) {
+    declareAndRest();
+  } else if (!board.includes('')) {
+    drawAndRest();
+  }
 }
 
-module.exports = reloadCSS;
-},{"./bundle-url":"../node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"player.scss":[function(require,module,exports) {
-var reloadCSS = require('_css_loader');
+function declareAndRest() {
+  if (player == 'X') {
+    alert("X");
+  } else {
+    alert("O");
+  }
 
-module.hot.dispose(reloadCSS);
-module.hot.accept(reloadCSS);
-},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+  reset();
+}
+
+function drawAndRest() {
+  alert('Draw');
+  reset();
+}
+
+function reset() {
+  board = ['', '', '', '', '', '', '', '', ''];
+  box.forEach(function (tile) {
+    tile.innerHTML = '';
+  });
+  gameOn = true;
+  roundWon = false;
+}
+},{}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -217,7 +251,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61033" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55401" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -393,5 +427,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js"], null)
-//# sourceMappingURL=/player.a0d0845e.js.map
+},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js","game.js"], null)
+//# sourceMappingURL=/game.7bbe06d5.js.map

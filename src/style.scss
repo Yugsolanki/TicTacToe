@@ -1,3 +1,19 @@
+$black : #000000;
+$cream : #FFDCAB;
+$pink : #D90FAF;
+$purple : #9111D7;
+$blue : #1111DA;
+$pastelblue : #0F75DA;
+$turqois : #0F75DA;
+$orange : #DC5F0D;
+$red : #D51013;
+$yellow : #FFF503;
+$lightpurple : #DD7DFFCC;
+$green: #00FF75;
+$lightorange : #FFB443;
+$tomatored : #FF5D5D;
+$pastelgreen : #218B82;
+
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
 * {
@@ -8,23 +24,27 @@
 
 html {
     font-size: 10px;
+    background-color: $cream;
 }
 
-body {
+html, body {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+}
+main, section {
     width: 100vw;
     height: 100vh;
 }
 
-main, section {
-    width: 100%;
-    height: 100vh;
+.main-home, .section-home {
     display: grid;
     position: relative;
     z-index: 1;
-}
-
-main {
-    background-color: #FFDCAB;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
 .button {
@@ -41,8 +61,8 @@ main {
     text-align: center;
     letter-spacing: 0.1rem;
     color: white;
-    background: #D90FAF;
-    border: 2px solid #000000;
+    background: $pink;
+    border: 2px solid $black;
     transition: all 800ms ease-in-out;
 
     a {
@@ -79,7 +99,7 @@ main {
     margin: auto;
     width: 13rem;
     height: 6rem;
-    background-color: black;
+    background-color: $black;
     z-index: -1;
     transition: all 500ms ease-in-out;
 }
@@ -92,28 +112,17 @@ main {
 ---------------------------------------------
 */
 
-.player-main {
-    width: 100%;
-    height: 100%;
+.main-player, .section-player {
+    margin: auto;
     display: grid;
     position: relative;
     z-index: 1;
     justify-content: center;
-    align-items: center;
-    text-align: center;
-    background-color: #FFDCAB;
+    align-content: center;
 }
 
-.player-section {
-    margin: auto;
-    height: 75%;
-    display: grid;
-    position: relative;
-    z-index: 1;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-
+.section-player {
+    grid-gap: 5rem;
 
     .player-name {
         position: relative;
@@ -124,17 +133,19 @@ main {
             font-weight: 400;
             text-align: center;
             letter-spacing: 0.1rem;
-            color: #000000;
+            color: $black;
         }
     
         input {
             position: relative;
+            display: grid;
+            align-items: center;
             bottom: 0;
             width: 35rem;
             height: 4rem;
             padding: 0 0 0 .5rem;
             outline: none;
-            border: 2px solid black;
+            border: 2px solid $black;
             font-size: 2rem;
             font-family: 'Bebas Neue', cursive;
             font-weight: 400;
@@ -147,7 +158,7 @@ main {
             height: 4rem;
             bottom: -.4rem;
             left: .4rem;
-            background-color: #000000;
+            background-color: $black;
             z-index: -1;
         }
     
@@ -155,7 +166,7 @@ main {
     
     .button-div {
         position: relative;
-        margin: -6rem 0 0 0;
+        margin: 0rem 0 0 0;
     
         .button {
             position: relative;
@@ -165,13 +176,13 @@ main {
             font-size: 4rem;
             font-family: 'Bebas Neue', cursive;
             font-weight: 400;
-            display: flex;
+            display: grid;
             align-items: center;
             justify-content: center;
             text-align: center;
             letter-spacing: 0.1rem;
             color: white;
-            background: #D90FAF;
+            background: $purple;
             border: 2px solid #000000;
             a {
                 color: white;
@@ -198,5 +209,216 @@ main {
             transition: all 500ms ease-in-out;
         }
     }
+
+
+    .rounds {
+        position: relative;
+        display: flex;
+        gap: 2rem;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 5rem;
+
+        .rounds_box {
+            position: relative;
+            width: 7rem;
+            height: 4rem;
+            background-color: white;
+            color: $black;
+            font-size: 3rem;
+            font-family: 'Bebas Neue', cursive;
+            font-weight: 400;
+            display: grid;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            letter-spacing: 0.1rem;
+            border: 2px solid $black;
+        }
+
+        .rounds_box::before {
+            content: '';
+            position: absolute;
+            top: .2rem;
+            left: 0.1rem;
+            width: 7rem;
+            height: 4rem;
+            background-color: $black;
+            z-index: -1;
+        }
+
+        .rounds_button {
+            width: 3rem;
+            height: 3rem;
+            background-color: white;
+            border-radius: 50%;
+            outline: none;
+            border: 2px solid $black;
+        }
+
+    }
+}
+
+
+
+/*
+----------------------------------------------------------------
+----------------------------------------------------------------
+*/
+
+.section-game {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+/*-----GAME BOARD----*/
+    .score-container {
+        position: relative;
+        width: 100%;
+        height: 8rem;
+        display: grid;
+        grid-auto-flow: row;
+        grid-template-columns: 1fr 1fr;
+
+        .player-score-box {
+            position: relative;
+            width: 100%;
+            height: 10rem;
+            border-width: 2px 0 2px 2px;
+            border-style: solid;
+            border-color: $black;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-content: center;
+            gap: 0rem;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-family: 'Bebas Neue', cursive;
+            font-weight: 400;
+        }
+    }
+
+    #number-rounds {
+        font-size: 3rem;
+        font-family: 'Bebas Neue', cursive;
+        font-weight: 400;
+        text-align: center;
+        display: block;
+        margin: 4rem;
+    }
+    
+
+    .game-box {
+        position: relative;
+        margin-top: 1rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        gap: 2rem;
+        //border: 1px solid black;
+
+
+        #curtain {
+            position: absolute;
+            width: 30rem;
+            height: 30rem;
+            background-color: $lightpurple;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+            z-index: 5;
+            justify-content: center;
+            align-content: center;
+
+                h1 {
+                    font-size: 12rem;
+                    color: white;
+                    font-family: 'Bebas Neue', cursive;
+                    font-weight: 400;
+                }
+        }
+
+        .box-container {
+            position: relative;
+            width: 8rem;
+            height: 8rem;
+            z-index: 2;
+
+            .box {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                border: 2px solid $black;
+                background-color: $pastelgreen;
+                display: grid;
+                align-items: center;
+                text-align: center;
+                font-size: 6rem;
+                font-family: 'Bebas Neue', cursive;
+                font-weight: 400;
+                color: white;
+            }
+
+            .box-shadow {
+                position: absolute;
+                top: .5rem;
+                left: .5rem;
+                width: 100%;
+                height: 100%;
+                background-color: #000000;
+                z-index: -1;
+            }
+        }
+
+
+    }
+
+    .button-container {
+        margin-top: 6rem;
+        position: relative;
+
+        .quit {
+            position: relative;
+            width: 13rem;
+            height: 6rem;
+            margin: auto;
+            font-size: 4rem;
+            font-family: 'Bebas Neue', cursive;
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            letter-spacing: 0.1rem;
+            color: white;
+            background: $blue;
+            border: 2px solid $black;
+            transition: all 800ms ease-in-out;
+    
+            a {
+                color: white;
+                text-decoration: none;
+            }
+        }
+
+        .quit-shadow {
+            position: absolute;
+            left: .7rem;
+            top: .7rem;
+            margin: auto;
+            width: 13rem;
+            height: 6rem;
+            background-color: $black;
+            z-index: -1;
+            transition: all 500ms ease-in-out;
+        }
+    }
+
 }
 
