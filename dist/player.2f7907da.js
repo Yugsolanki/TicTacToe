@@ -117,164 +117,38 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"game.js":[function(require,module,exports) {
-var player1NameBox = document.getElementById("player1-name");
-var player2NameBox = document.getElementById("player2-name");
-var player1ScoreBox = document.getElementById("player1-score");
-var player2ScoreBox = document.getElementById("player2-score");
-var quitBtn = document.getElementById("quit");
-var curtain = document.getElementById('curtain');
-var timer = document.getElementById('timer');
-var winnerBox = document.getElementById('winner');
-var roundsShow = document.getElementById('number-rounds');
-curtain.style.display = 'grid';
-var box = document.querySelectorAll(".box");
-var round = 1;
-var player1Score = 0;
-var player2Score = 0;
-var player = 'X';
-var gameOn = false;
-var roundWon = false;
-var gameOver = false;
-var board = ['', '', '', '', '', '', '', '', ''];
-var winningCombination = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
-var rounds = localStorage.getItem('rounds');
-var player1Name = localStorage.getItem('player1');
-var player2Name = localStorage.getItem('player2');
-console.log(player1Name, player2Name);
-player1NameBox.innerHTML = player1Name;
-player2NameBox.innerHTML = player2Name;
-roundsShow.innerHTML = "Round ".concat(round, " of ").concat(rounds);
-player1ScoreBox.innerHTML = player1Score;
-player2ScoreBox.innerHTML = player2Score;
-var count = 3;
-
-function anim() {
-  if (count >= 0) {
-    if (count === 0) {
-      timer.innerHTML = 'START!';
-    } else {
-      timer.innerHTML = count;
-    }
-
-    count--;
-    setTimeout(anim, 1000);
-  } else {
-    timer.style.display = 'none';
-    curtain.style.display = 'none';
+})({"player.js":[function(require,module,exports) {
+var rounds = 1;
+var addBtn = document.getElementById("add-round");
+var subBtn = document.getElementById("sub-round");
+var roundBox = document.getElementById("roundsBox");
+var player1Input = document.getElementById("player1-input");
+var player2Input = document.getElementById("player2-input");
+var playBtn = document.getElementById('play-btn');
+var player1Name, player2Name;
+roundBox.innerHTML = rounds;
+addBtn.addEventListener("click", function () {
+  if (rounds < 10) {
+    rounds++;
+    roundBox.innerHTML = rounds;
   }
-}
-
-anim();
-
-function playGame() {
-  box.forEach(function (tile, index) {
-    tile.addEventListener('click', function () {
-      return userAction(tile, index);
-    });
-  });
-
-  function userAction(tile, index) {
-    if (tile.innerHTML != 'X' && tile.innerHTML != 'O') {
-      tile.innerHTML = player;
-      board[index] = player;
-      checkWinner();
-      swapPlayer();
-    }
+});
+subBtn.addEventListener("click", function () {
+  if (rounds > 1) {
+    rounds--;
+    roundBox.innerHTML = rounds;
   }
-
-  function swapPlayer() {
-    player = player == 'X' ? 'O' : 'X';
-  }
-
-  function checkWinner() {
-    for (var i = 0; i <= 7; i++) {
-      var winCondition = winningCombination[i];
-      var a = board[winCondition[0]];
-      var b = board[winCondition[1]];
-      var c = board[winCondition[2]];
-
-      if (a === '' || b === '' || c === '') {
-        continue;
-      }
-
-      if (a === b && b === c) {
-        roundWon = true;
-        gameOn = false;
-        break;
-      }
-    }
-
-    if (roundWon) {
-      declareAndRest();
-    }
-
-    if (!board.includes('')) {
-      drawAndRest();
-    }
-  }
-
-  round++;
-  console.log(round);
-}
-
-function declareAndRest() {
-  if (player == 'X') {
-    player1Score++;
-    player1ScoreBox.innerHTML = player1Score;
-    curtain.style.display = 'grid';
-    winnerBox.style.display = 'block';
-    winnerBox.innerHTML = "Winner! <br> ".concat(player);
-    setTimeout(function () {
-      curtain.style.display = 'none';
-      winnerBox.style.display = 'none';
-      reset();
-    }, 3000);
-  } else {
-    player2Score++;
-    player2ScoreBox.innerHTML = player2Score;
-    curtain.style.display = 'grid';
-    winnerBox.style.display = 'block';
-    winnerBox.innerHTML = "Winner! <br> ".concat(player);
-    setTimeout(function () {
-      curtain.style.display = 'none';
-      winnerBox.style.display = 'none';
-      reset();
-    }, 3000);
-  }
-}
-
-function drawAndRest() {
-  setTimeout(function () {
-    curtain.style.display = 'grid';
-    winnerBox.style.display = 'block';
-    winnerBox.innerHTML = "DRAW";
-  }, 3000);
-  reset();
-}
-
-function reset() {
-  board = ['', '', '', '', '', '', '', '', ''];
-  box.forEach(function (tile) {
-    tile.innerHTML = '';
-  });
-  roundWon = false;
-}
-
-if (round <= rounds) {
-  gameOn = true;
-
-  if (gameOn) {
-    playGame();
-  }
-} else if (round > rounds) {
-  gameOn = false;
-  curtain.style.display = 'grid';
-  winnerBox.style.display = 'block';
-}
-
-quitBtn.addEventListener('click', function () {
-  localStorage.clear();
+});
+player1Input.addEventListener('blur', function () {
+  player1Name = player1Input.value;
+  localStorage.setItem('player1', player1Name);
+});
+player2Input.addEventListener('blur', function () {
+  player2Name = player2Input.value;
+  localStorage.setItem('player2', player2Name);
+});
+playBtn.addEventListener('click', function () {
+  localStorage.setItem('rounds', rounds);
 });
 },{}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -480,5 +354,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js","game.js"], null)
-//# sourceMappingURL=/game.7bbe06d5.js.map
+},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js","player.js"], null)
+//# sourceMappingURL=/player.2f7907da.js.map

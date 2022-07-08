@@ -288,12 +288,20 @@ main, section {
   z-index: 5;
   justify-content: center;
   align-content: center;
+  text-align: center;
 }
 .section-game .game-box #curtain h1 {
   font-size: 12rem;
   color: white;
   font-family: "Bebas Neue", cursive;
   font-weight: 400;
+}
+.section-game .game-box #curtain #winner {
+  font-size: 8rem;
+  color: white;
+  font-family: "Bebas Neue", cursive;
+  font-weight: 400;
+  display: none;
 }
 .section-game .game-box .box-container {
   position: relative;
